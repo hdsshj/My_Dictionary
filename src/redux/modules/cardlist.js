@@ -10,7 +10,11 @@ const UPDATE = 'card/UPDATE';
 const REMOVE = 'card/REMOVE';
 
 const initialState = {
-  card_list: [],
+  card_list: [ 
+    {word: '파이어 베이스가 안된다', desc: '난 한 것도 없는데', example: '날 방해한다'},
+    {word: '쓰기 귀찮아', desc: '난 한 것도 없는데', example: '날 방해한다'},
+    {word: '텍스트도 못가져온다', desc: '머티리얼', example: '어렵다'}
+  ],
   edit_card:[]
 };
 
@@ -64,7 +68,7 @@ export const createCardFB = (card) => {
 };
 
 
-
+// 파이어베이스 사용시 활성화
 export const updateCardFB = (card, card_id) => {
   return async function (dispatch, getState) {
     const docRef = await doc(db, 'mydictionary', card_id)
@@ -76,7 +80,7 @@ export const updateCardFB = (card, card_id) => {
     const _card_list = getState().cardlist.card_list
     // console.log(_card_list)
     const card_index = _card_list.findIndex((b) => {
-      console.log(b.id)
+      // console.log(b.id)
       return b.id === card_id;
     })
     // console.log(card_index,'인덱스임')

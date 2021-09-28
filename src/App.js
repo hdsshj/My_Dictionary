@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch} from "react-redux";
 import { loadCardFB } from "./redux/modules/cardlist";
 
+
 import './App.css'
 
 
@@ -22,7 +23,7 @@ function App() {
   const dispatch = useDispatch();
  
  
-
+//파이어베이스 활성화
   React.useEffect(() => {
     dispatch(loadCardFB());
     
@@ -38,11 +39,7 @@ function App() {
       </div>
       
       <Container>
-        <Route path='/' exact >
-          
-            <CardList/>
-         
-        </Route>
+        <Route path='/' component = {CardList} exact />
       
       <Route path='/CardEdit/:index' exact>
         <CardEdit />
@@ -67,6 +64,7 @@ const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   font-family: 'Gamja Flower', cursive;
+ 
 
 `;
 
