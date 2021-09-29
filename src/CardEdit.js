@@ -19,7 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 
-import {removeCardFB,removeCard, updateCard, updateCardFB } from "./redux/modules/cardlist";
+import { removeCardFB, removeCard, updateCard, updateCardFB } from "./redux/modules/cardlist";
 
 
 const CardEdit = (props) => {
@@ -34,33 +34,18 @@ const CardEdit = (props) => {
     const history = useHistory();
     const cardIndex = params.index;
 
-
-      
-
-    const deleteBtn = () => {
-
-
-        // dispatch(removeCard(cardIndex));
-
-        //파이어베이스 사용시 활성화
-        dispatch(removeCardFB(card_list[cardIndex].id));
-        console.log(card_list[cardIndex].id)
-        history.push('/')
-    };
-
     const editBtn = () => {
-    //     dispatch(updateCard(
-    //         {
-    //             word: newWordText.current.value,
-    //             desc: newDescText.current.value,
-    //             example: newExampleText.current.value,
-    //         },
-    //         cardIndex
-    //     )
-
-    //     )
-    //     history.push('/')
-    // }
+        //     dispatch(updateCard(
+        //         {
+        //             word: newWordText.current.value,
+        //             desc: newDescText.current.value,
+        //             example: newExampleText.current.value,
+        //         },
+        //         cardIndex
+        //     )
+        //     )
+        //     history.push('/')
+        // }
 
         //파이어베이스사용시 활성화
         dispatch(updateCardFB(
@@ -72,66 +57,63 @@ const CardEdit = (props) => {
             card_list[cardIndex].id
         )
             // console.log(params.index)
-
         )
         history.push('/')
-         
+
     };
-    
-    
+
+
 
     return (
-        
+
         <Main>
-        <Img alt="post" src={img} />
-        <Sub1>
-            <h3>단어</h3>
-            <TextField
-                style={{ width: '440px', margin: '20px 20px' }}
-                label="단어를 입력하세요."
-                variant="outlined"
-                type='text'
-                color="primary"
-                defaultValue = {card_list[cardIndex]? card_list[cardIndex].word : ''}
-                inputRef={newWordText} />
-        </Sub1>
-        <Sub2>
-            <h3>설명</h3>
-            <TextField
-                label="설명을 입력하세요."
-                style={{ width: '440px', margin: '0px 20px' }}
-                multiline
-                rows={2.5}
-                type='text'
-                color="primary" 
-                defaultValue = {card_list[cardIndex]? card_list[cardIndex].desc : ''}
-                inputRef={newDescText} />
-        </Sub2>
-        <Sub3 >
-            <h3>예시</h3>
-            <TextField label="예제를 입력하세요."
-                style={{ width: '440px', margin: '0px 20px' }}
-                multiline
-                rows={2.5}
-                type='text'
-                color="primary"
-                defaultValue = {card_list[cardIndex]? card_list[cardIndex].example : ''}
-                inputRef={newExampleText} />
-        </Sub3>
-        <AddBtn>
-            <IconButton onClick={editBtn} >
-                <EditIcon style={{ fontSize: '40px' }}  />
-                
-                
-            </IconButton>
-        </AddBtn>
-        <BackBtn>
-            {/* <IconButton onClick={deleteBtn}> */}
-            <IconButton onClick={() => { history.push('/') }}>
-                <ArrowBackIcon style={{ fontSize: '40px' }} />
-            </IconButton>
-        </BackBtn>
-    </Main>
+            <Img alt="post" src={img} />
+            <Sub1>
+                <h3>단어</h3>
+                <TextField
+                    style={{ width: '440px', margin: '20px 20px' }}
+                    label="단어를 입력하세요."
+                    variant="outlined"
+                    type='text'
+                    color="primary"
+                    defaultValue={card_list[cardIndex] ? card_list[cardIndex].word : ''}
+                    inputRef={newWordText} />
+            </Sub1>
+            <Sub2>
+                <h3>설명</h3>
+                <TextField
+                    label="설명을 입력하세요."
+                    style={{ width: '440px', margin: '0px 20px' }}
+                    multiline
+                    rows={2.5}
+                    type='text'
+                    color="primary"
+                    defaultValue={card_list[cardIndex] ? card_list[cardIndex].desc : ''}
+                    inputRef={newDescText} />
+            </Sub2>
+            <Sub3 >
+                <h3>예시</h3>
+                <TextField label="예제를 입력하세요."
+                    style={{ width: '440px', margin: '0px 20px' }}
+                    multiline
+                    rows={2.5}
+                    type='text'
+                    color="primary"
+                    defaultValue={card_list[cardIndex] ? card_list[cardIndex].example : ''}
+                    inputRef={newExampleText} />
+            </Sub3>
+            <AddBtn>
+                <IconButton onClick={editBtn} >
+                    <EditIcon style={{ fontSize: '40px' }} />
+                </IconButton>
+            </AddBtn>
+            <BackBtn>
+                {/* <IconButton onClick={deleteBtn}> */}
+                <IconButton onClick={() => { history.push('/') }}>
+                    <ArrowBackIcon style={{ fontSize: '40px' }} />
+                </IconButton>
+            </BackBtn>
+        </Main>
 
 
     );
@@ -174,14 +156,15 @@ const Sub1 = styled.div`
     border-radius: 20px;
     padding: 5px;
     z-index: 2;
+    
     h3{
         margin: 5px auto 10px 20px;
     }
     p{
         margin: -5px auto 10px 20px;
     }
-
 `;
+
 const Sub2 = styled.div`
     background-color: #dcd8d4;
     position: absolute;
@@ -193,14 +176,15 @@ const Sub2 = styled.div`
     border-radius: 20px;
     padding: 5px;
     z-index: 3;
+
     h3{
         margin: 5px auto 10px 20px;
     }
     p{
         margin: -5px auto 10px 20px;
-    }
-    
+    }    
 `;
+
 const Sub3 = styled.div`
     background-color: #dcd8d4;
     position: absolute;
@@ -212,6 +196,7 @@ const Sub3 = styled.div`
     border-radius: 20px;
     padding: 5px;
     z-index: 4;
+
     h3{
         margin: 5px auto 10px 20px;
     }
@@ -229,7 +214,6 @@ position: absolute;
 top: -15px;
 left: 440px;
 z-index: 6;
-
 `;
 
 const BackBtn = styled.div`
@@ -238,7 +222,6 @@ position: absolute;
 top: -15px;
 left: 0px;
 z-index: 6;
-
 `;
 
 export default CardEdit;

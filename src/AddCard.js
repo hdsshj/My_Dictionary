@@ -42,7 +42,7 @@ const AddCard = (props) => {
             word: wordText.current.value,
             desc: descText.current.value,
             example: exampleText.current.value
-        })); 
+        }));
 
         // dispatch(createCard({
         //     word: wordText.current.value,
@@ -55,7 +55,6 @@ const AddCard = (props) => {
 
 
     return (
-
         <Main>
             <Img alt="post" src={img} />
             <Sub1>
@@ -67,7 +66,6 @@ const AddCard = (props) => {
                     type='text'
                     color="primary"
                     inputRef={wordText} />
-                    
             </Sub1>
             <Sub2 onClick={() => { console.log(descText.current.value) }}  >
                 <h3>설명</h3>
@@ -77,7 +75,8 @@ const AddCard = (props) => {
                     multiline
                     rows={2.5}
                     type='text'
-                    color="primary" inputRef={descText} />
+                    color="primary" 
+                    inputRef={descText} />
             </Sub2>
             <Sub3 >
                 <h3>예시</h3>
@@ -86,7 +85,8 @@ const AddCard = (props) => {
                     multiline
                     rows={2.5}
                     type='text'
-                    color="primary" inputRef={exampleText} />
+                    color="primary" 
+                    inputRef={exampleText} />
             </Sub3>
             <AddBtn>
                 <IconButton onClick={addBtn}>

@@ -15,7 +15,6 @@ const initialState = {
     {word: '쓰기 귀찮아', desc: '난 한 것도 없는데', example: '날 방해한다'},
     {word: '텍스트도 못가져온다', desc: '머티리얼', example: '어렵다'}
   ],
-  edit_card:[]
 };
 
 
@@ -69,42 +68,58 @@ export const createCardFB = (card) => {
 
 
 // 파이어베이스 사용시 활성화
+//수정 하고자 하는 내용과 data의 id값을 파라미터로 받는다.
 export const updateCardFB = (card, card_id) => {
   return async function (dispatch, getState) {
+    // 파라미터로 받은 card_id와 같은 id를 가지고 있는 doc의 data를 가져와서
     const docRef = await doc(db, 'mydictionary', card_id)
-    
-    // const docRef_word = await doc(db, 'mydictionary', card)
- 
+
+    // 해당 data를 업데이트 한다
     await updateDoc(docRef, {word : card.word, desc : card.desc, example : card.example})
-    // console.log({word : card.word, desc : card.desc, example : card.example})
+
+    //card_list의 state값을 가져와서
     const _card_list = getState().cardlist.card_list
-    // console.log(_card_list)
+
+    //id값이 같은 data만 반환 한다.
     const card_index = _card_list.findIndex((b) => {
       // console.log(b.id)
       return b.id === card_id;
     })
     // console.log(card_index,'인덱스임')
+
+     //updateCard 액션을 dispatch 한다.
     dispatch(updateCard({word : card.word, desc : card.desc, example : card.example},card_index))
   }
 };
 
-
+//미들웨어 REMOVE
+//지우고자 하는 data의 id값을 파라미터로 받는다.
 export const removeCardFB = (card_id) => {
   return async function (dispatch, getState) {
+    // card_id가 없으면 alert을 띄운다.
     if(!card_id){
       window.alert('지울게 없네용 ㅎ')
       return;
     }
 
+    // 파라미터로 받은 card_id와 같은 id를 가지고 있는 doc의 data를 가져와서
     const docRef = await doc(db, 'mydictionary', card_id)
+
+    // 해당 data를 삭제 한다
     await deleteDoc(docRef)
-    console.log(docRef)
+    // console.log(docRef)
+
+    //card_list의 state값을 가져와서
     const _card_list = getState().cardlist.card_list
     console.log(_card_list)
+
+    //id값이 같은 data만 반환 한다.
     const card_index = _card_list.findIndex((b) => {
       return b.id === card_id;
     })
-    // console.log(card_index,'인덱스임')
+    // console.log(card_index,'인덱스임')\
+    
+    //removeCard 액션을 dispatch 한다.
     dispatch(removeCard(card_index));
   }
 };
@@ -127,23 +142,24 @@ export default function reducer(state = initialState, action = {}) {
       console.log('업데이트할거야', state.card_list)
       const new_card_list = state.card_list.map((l, idx) => {
         // console.log()
+        //action으로 받아온 list중 index값이 같은 data를 찾아
         if (parseInt(action.cardIndex) === idx) {
           
-          
+          //수정된 data로 반환 하고
           return {...l, ...action.card}
         } else {
+          //index값이 다르면 기존 data를 반환한다.
           return l;
         }
       })
       console.log({...state, card_list : new_card_list})        
-
       return {...state, card_list : new_card_list}
-
-    }
+    }    
     case 'card/REMOVE': {
       console.log('delete 연결 댐', state.card_list)
       const new_card_list = state.card_list.filter((l, idx) => {
         // console.log(action.cardIndex)
+        // action으로 받아온 list중 Index값이 같지 않은 data로만 이루어진 배열을 반환한다.
         return parseInt(action.cardIndex) !== idx
       })
 

@@ -3,18 +3,14 @@ import styled from "styled-components";
 import img from './static/goodnotes sticker.png'
 
 const Style = (props) => {
+
+    const wordText = React.useRef(null);
+    const descText = React.useRef(null);
+    const exampleText = React.useRef(null);
+
     return (
         <Main>
-             <Img alt="post" src = {img}/>
-            <Sub>
-            스타일
-            </Sub>
-            <Sub>
-            스타일
-            </Sub>
-            <Sub>
-            스타일
-            </Sub>
+           
         </Main>
     );
 };
@@ -22,9 +18,14 @@ const Style = (props) => {
 
 
 const Main = styled.div`
- 
-    background-image : url('bgimg.jpg');
-
+    position: relative;
+    top: 0px;
+    background-image : url("${img}");
+    width: 400px;
+    height: 400px;
+    padding: 30px;
+    margin: auto;
+   
     
 
 `;
@@ -45,5 +46,17 @@ const Sub = styled.div`
     width: 300px;
     height: 90px;
     margin: 20px auto;
+`;
+
+const Sub3 = styled.div`
+    background-color: aquamarine;
+
+    width: 300px;
+    height: 90px;
+    margin: 20px auto;
+
+    p{
+        color: blue;
+    }
 `;
 export default Style;
